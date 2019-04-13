@@ -1,0 +1,2 @@
+# TypingWarzz
+Competitive typing game
