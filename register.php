@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title> TypingWarzz - Register Page</title>
-	<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="lib/bootstrap-4.3.1/css/bootstrap.min.css"  rel="stylesheet" id="bootstrap-css">
+	<script type="text/javascript" src="lib/jquery-3.4.0.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 	<?php
 		$servername = "localhost";
@@ -27,7 +28,7 @@
 			if(mysqli_multi_query($conn,$query1))
 			{
 				echo "Success!!";
-				$url = "/typeracer/login.php";
+				$url = "typeracer/";
 		        header('Location: '.$url);
 		        exit();
 			}

@@ -1,6 +1,6 @@
-<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="lib/bootstrap-4.3.1/css/bootstrap.min.css"  rel="stylesheet" id="bootstrap-css">
+<script type="text/javascript" src="lib/jquery-3.4.0.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <style type="text/css">
     body{
         background: -webkit-linear-gradient(left, #3931af, #00c6ff);
