@@ -80,7 +80,7 @@
 <body>
     <div class="login-form" style="margin-top: 10%;">
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-            <div class="display:inline-block;text-center:true;"><img src="images/logo.png" width=45 length=45 style="float:left;margin-right: 7%;margin-left: 4%;"><h2 >TypingWarzz</h2></div>       
+            <div class="display:inline-block;text-center:true;"><img src="images/logo.png" width=45 length=45 style="float:left;margin-right: 7%;margin-left: 4%;margin-bottom: 10%;"><h2 >TypingWarzz</h2></div>       
             <div class="form-group">
                 <input name="username" type="text" class="form-control" placeholder="Username" required="required">
             </div>

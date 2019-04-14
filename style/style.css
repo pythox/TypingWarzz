@@ -17,10 +17,6 @@ td {
 	font-size: 12px;
 }
 
-#post_typing{
-	white-space: nowrap;
-}
-
 #correct{
 	background-color: #CFFF5B;
 	font-family: "Courier New", Courier;

@@ -104,8 +104,8 @@
 			</div>
 			<div class="col-md-8 h-100"  style="min-height:300px;display: none;" id="post_typing">
 				<span class="badge badge-primary" style="margin-left:3px;" id="speed"></span>
-				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
-					<p>
+				<div class="jumbotron" style="min-height: 300px; margin-top:6px;white-space: nowrap;padding: 1%;">
+					<p style="margin:2%;">
 						<span id="correct"></span>
 						<span id="wrong"></span>
 						<span id="remaining"></span>
@@ -149,7 +149,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 h-100">
-			<!-- Display the leaderboard ( Query in descending order of Max. speed and then get top 5 results ) -->
 			<span class="badge badge-info"> Leaderboard </span>
 			<table class="table table-bordered" style="font-size: 10px;margin-top:6px;text-align: center;">
 				<thead> 
@@ -160,6 +159,27 @@
 						<td scope="col" class="bg-info"> Time </td>
 					</tr>
 				</thead>
+				<?php
+					$current_user = $_SESSION['username'];
+					$query1 = "SELECT match_id, profile_id, MAX(speed) as speed, time FROM matches GROUP BY profile_id ORDER BY speed DESC";
+					$result = mysqli_query($conn, $query1);
+					while ($row = mysqli_fetch_assoc($result)) {
+					    echo("<tr>");
+					    echo("<td>");
+					    echo($row['match_id']);
+					    echo("</td>");
+					    echo("<td>");
+					    echo($row['profile_id']);
+					    echo("</td>");
+					    echo("<td>");
+					    echo($row['speed']);
+					    echo("</td>");
+					    echo("<td>");
+					    echo($row['time']);
+					    echo("</td>");
+					  	echo("</tr>");
+					}	
+				?>
 			</table>
 			</div>
 			<div class="col-md-4" style="min-height: 300px;">
@@ -182,6 +202,11 @@
     <script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/flipclock/flipclock.js"></script>
 	<script type="text/javascript">
+		window.onkeydown = function(e) {
+  		if (e.keyCode == 32 && e.target == document.body) {
+    		e.preventDefault();
+  		}
+		};
 		var clock = $('.clock').FlipClock(5, {
 			clockFace: 'MinuteCounter',
 			countdown: true,
@@ -197,8 +222,14 @@
 	    	post_typing.style.display = 'block';
 			var match_id = Math.floor(Math.random()*101);
 	    	var start_time = Math.round((new Date()).getTime() / 1000);
-	    	// Load the objective string from the database of text
-	    	var str = "this is ";
+
+	    	var str = "<?php 
+    			$query1 = "SELECT text_info FROM textdata ORDER BY RAND() LIMIT 1;";
+				$result = mysqli_query($conn, $query1);
+				while ($row = mysqli_fetch_assoc($result)) {
+				    echo($row['text_info']);
+				}	
+	    		?>";
 			var correct = document.getElementById("correct");
 			var wrong = document.getElementById("wrong");
 			var remaining = document.getElementById("remaining");
