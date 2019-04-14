@@ -36,7 +36,7 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "type_racer";
+        $dbname = "typingwarzz";
         $conn = mysqli_connect($servername, $username, $password, $dbname);
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -44,11 +44,11 @@
         if($_SERVER['REQUEST_METHOD']=='POST'){  
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $query1 = "SELECT * FROM login WHERE user_name='$username'";
+            $query1 = "SELECT * FROM profile WHERE user_id='$username'";
             $result1 = mysqli_query($conn, $query1);
             if(mysqli_num_rows($result1) > 0)
             {
-                $query2 = "SELECT ID FROM login WHERE user_name='$username' AND password='$password';";
+                $query2 = "SELECT * FROM profile WHERE user_id='$username' AND password='$password';";
                 $result2 = mysqli_query($conn, $query2);
                 if(mysqli_num_rows($result2) > 0)
                 {

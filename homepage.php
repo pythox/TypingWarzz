@@ -1,3 +1,15 @@
+<?php
+	session_start();
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "typingwarzz";
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,16 +66,16 @@
 				</li>
 			</ul>
 			<ul class="navbar-nav navbar-right" style="font-size: 14	px;">
+		      	<li class="nav-item"> 
+					<span class="navbar-text" style="margin-left:5px;margin-right:10px;font-size: 13px;"><b>Rank</b></span>
+				</li>
 		      	<li class="nav-item">
-		      		<!-- Get the profile name from session variable and get its rank -->
-					<span class="navbar-text" style="margin-left:5px;margin-right:5px;color: white;font-size: 13px;"> <b> Profile Name </b> </span>
+					<span class="navbar-text" style="margin-left:5px;margin-right:5px;color: white;font-size: 13px;">
+					<b><?php echo('@' . $_SESSION['username']);?></b>
+					</span>
 		      	</li>
 		      	<li class="nav-item"> 
-		      		<!-- Display the queried rank -->
-					<span class="navbar-text" style="margin-left:5px;margin-right:10px;font-size: 13px;"><b> Rank </b></span>
-				</li>
-		      	<li class="nav-item"> 
-					<a href="#" class="nav-link" style="margin-left:5px;margin-right:0px;font-size: 13px;"> <b> Logout  </b></a>
+					<a href="index.php" class="nav-link" style="margin-left:5px;margin-right:0px;font-size: 13px;"><b>Logout</b></a>
 				</li>
 			</ul>
 		</div>
@@ -111,6 +123,24 @@
 								<td scope="col" class="bg-info"> Total time taken </td>
 							</tr>
 						</thead>
+						<?php
+							$current_user = $_SESSION['username'];
+							$query1 = "SELECT match_id, speed, time FROM matches WHERE profile_id='$current_user';";
+							$result = mysqli_query($conn, $query1);
+							while ($row = mysqli_fetch_assoc($result)) {
+							    echo("<tr>");
+							    echo("<td>");
+							    echo($row['match_id']);
+							    echo("</td>");
+							    echo("<td>");
+							    echo($row['speed']);
+							    echo("</td>");
+							    echo("<td>");
+							    echo($row['time']);
+							    echo("</td>");
+							  	echo("</tr>");
+							}	
+						?>
 					</table>
 			</div>
 		</div>
@@ -201,7 +231,7 @@
 					    	$.ajax({
 					    		url: "dbhelper.php",
 					    		type: 'POST',
-					    		data: ({id:match_id, prof:"MEET", speed:current_speed, time:total_time}),
+					    		data: ({id:match_id, prof:"<?php echo($_SESSION['username']); ?>", speed:current_speed, time:total_time}),
 					    		async: true,
 					    		success: function(data) {alert(data);}
 					    	})

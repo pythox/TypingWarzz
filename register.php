@@ -10,7 +10,7 @@
 		$servername = "localhost";
 	    $username = "root";
 	    $pass = "";
-	    $dbname = "type_racer";
+	    $dbname = "typingwarzz";
 	    $conn = mysqli_connect($servername, $username, $pass, $dbname);
 	    if (!$conn) {
 	    	die("Connection failed: " . mysqli_connect_error());
@@ -23,12 +23,11 @@
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 			$country = $_POST['country'];
-			$query1 = "INSERT INTO `register`(`user_name`, `password`, `first_name`, `last_name`, `email`, `country`) VALUES ('$username','$password','$first_name','$last_name','$email','$country');";
-			$query1 .= "INSERT INTO `login`(`user_name`, `password`) VALUES('$username','$password');";
-			if(mysqli_multi_query($conn,$query1))
+			$query = "INSERT INTO `profile`(`user_id`, `password`, `first_name`, `last_name`, `email`, `profession`, `rank`, `total_speed`, `total_races`, `total_accuracy`, `total_time`, `country`) VALUES ('$username','$password','$first_name','$last_name','$email','$profession', 'Noob', '0', '0', '0', '0', '$country');";
+			if(mysqli_query($conn,$query))
 			{
 				echo "Success!!";
-				$url = "typeracer/";
+				$url = "index.php";
 		        header('Location: '.$url);
 		        exit();
 			}
@@ -72,20 +71,13 @@
 							</div> <!-- form-group end.// -->	
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label>City</label>
-									<input name="city" type="text" class="form-control">
+									<label>Profession</label>
+									<input name="profession" type="text" class="form-control">
 								</div> <!-- form-group end.// -->
 								<div class="form-group col-md-6">
 									<label>Country</label>
-									<select name="country" id="inputState" class="form-control">
-										<option> Choose...</option>
-										<option>Uzbekistan</option>
-										<option>Russia</option>
-										<option selected="">United States</option>
-										<option>India</option>
-										<option>Afganistan</option>
-									</select>
-								</div> <!-- form-group end.// -->
+									<input name="country" type="text" class="form-control">
+								</div> 
 							</div> <!-- form-row.// -->
 							<div class="form-group">
 								<label>Create password</label>
