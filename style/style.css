@@ -1,16 +1,23 @@
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/Karla-Regular.ttf');
+}
+
 p {
 	font-size: 0;
 }
 
 body {
-  font-family: 'Helvetica' !important;
+  font-family: 'Karla', sans-serif !important;
 }
 
 td {
 	font-size: 12px;
 }
 
-#typing_region{
+#post_typing{
 	white-space: nowrap;
 }
 
@@ -30,3 +37,7 @@ td {
 	font-family: "Courier New", Courier;
 	font-size: 20px;
 }
+thead {
+	font-weight: bold;
+}
+

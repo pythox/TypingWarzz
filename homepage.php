@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<link rel="stylesheet" href="lib/bootstrap-4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="lib/flipclock/flipclock.css">
+	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
 	<style type="text/css">
 		.flip-clock-wrapper ul {
 		    background: #fff;
@@ -33,35 +34,37 @@
 		<nav class="navbar navbar-expand-md navbar-light bg-primary navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a href="/TypingWarzz/homepage.php" class="navbar-brand"><img src="logo.png" width=30 length=30></a>
-					<span class="navbar-text" style="font-family: 'Helvetica';color: white;font-size: 20px;"> <b> TypingWarzz </b> </span>					
+					<a href="/TypingWarzz/homepage.php" class="navbar-brand"><img src="images/logo.png" width=30 length=30></a>
+					<span class="navbar-text" style="font-size: 20px;color: white;"> <b> TypingWarzz </b> </span>					
 				</div>
 		    <ul class="navbar-nav navbar-left">
 				<li class="nav-item"> 
 					<a href="/TypingWarzz/homepage.php" class="nav-link active"> 
-						Home
+						<b>Home</b>
 					</a>
 				</li>
 				<li class="nav-item"> 
 					<a href="/TypingWarzz/profile.php" class="nav-link"> 
-						Profile
+						<b>Profile</b>
 					</a>
 				</li>
 				<li class="nav-item"> 
 					<a href="/TypingWarzz/aboutus.php" class="nav-link"> 
-						About Us
+						<b>About Us</b>
 					</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav navbar-right" style="font-size: 14	px;">
-				<li class="nav-item"> 
-					<span class="navbar-text" style="margin-left:5px;margin-right:5px;font-size: 13px;"><b> Speed </b></span>
-				</li>
 		      	<li class="nav-item">
+		      		<!-- Get the profile name from session variable and get its rank -->
 					<span class="navbar-text" style="margin-left:5px;margin-right:5px;color: white;font-size: 13px;"> <b> Profile Name </b> </span>
 		      	</li>
 		      	<li class="nav-item"> 
-					<a href="#" class="nav-link" style="margin-left:0px;margin-right:5px;font-size: 13px;"> <b> Logout  </b></a>
+		      		<!-- Display the queried rank -->
+					<span class="navbar-text" style="margin-left:5px;margin-right:10px;font-size: 13px;"><b> Rank </b></span>
+				</li>
+		      	<li class="nav-item"> 
+					<a href="#" class="nav-link" style="margin-left:5px;margin-right:0px;font-size: 13px;"> <b> Logout  </b></a>
 				</li>
 			</ul>
 		</div>
@@ -71,21 +74,23 @@
 	<div class="container" style="margin-top: 20px;">
 		<div class="row">
 			<div class="col-md-8 h-100"  style="min-height:300px;" id="pre_typing">
-				<span class="badge badge-primary" style="margin-left:3px;"> Get Ready !! </span>
+				<span class="badge badge-danger" style="margin-left:3px;"> Get Ready !! </span>
 				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
-					<div class="clock" style="margin-left: 23%;">
+					<div class="clock" style="width:300px;margin:0 auto;">
 					</div>
 				</div>
 			</div>
-
 			<div class="col-md-8 h-100"  style="min-height:300px;display: none;" id="results">
 				<span class="badge badge-primary" style="margin-left:3px;"> Results </span>
-				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
-					<span id="result"></span>
+				<div class="jumbotron" style="min-height: 300px; margin-top:6px;" style="font-size: 16px;">
+					<b>Match ID : </b><span id="result_id"></span><br>
+					<b>Average Speed : </b><span id="result_speed"></span><br>
+					<b>Accuracy : </b><span id="result_error"></span><br>
+					<b>Total time : </b><span id="result_time"></span><br><br>
 					<a href="homepage.php" class="btn btn-primary" role="button">Race Again</a>
+					<a href="homepage.php" class="btn btn-info" role="button">See the leaderboard</a>
 				</div>
 			</div>
-				
 			<div class="col-md-8 h-100"  style="min-height:300px;display: none;" id="post_typing">
 				<span class="badge badge-primary" style="margin-left:3px;" id="speed"></span>
 				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
@@ -96,14 +101,15 @@
 					</p>
 				</div>	
 			</div>
+			<!-- Get the players history from the database -->
 			<div class="col-md-4" style="min-height: 300px;">
-					<span class="badge badge-primary" style="margin-left:3px;"> History </span>
+					<span class="badge badge-info" style="margin-left:3px;"> History </span>
 					<table class="table table-bordered" style="font-size: 10px;margin-top:6px;text-align: center;">
 						<thead> 
 							<tr>
-								<td scope="col" class="bg-primary"> MatchId </td>
-								<td scope="col" class="bg-primary"> Average WPM </td>
-								<td scope="col" class="bg-primary"> Total time taken </td>
+								<td scope="col" class="bg-info"> MatchId </td>
+								<td scope="col" class="bg-info"> Average WPM </td>
+								<td scope="col" class="bg-info"> Total time taken </td>
 							</tr>
 						</thead>
 					</table>
@@ -114,26 +120,28 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 h-100">
-			<span class="badge badge-primary"> Leaderboard </span>
+			<!-- Display the leaderboard ( Query in descending order of Max. speed and then get top 5 results ) -->
+			<span class="badge badge-info"> Leaderboard </span>
 			<table class="table table-bordered" style="font-size: 10px;margin-top:6px;text-align: center;">
 				<thead> 
 					<tr>
-						<td scope="col" class="bg-primary"> MatchId </td>
-						<td scope="col" class="bg-primary"> PlayerId </td>
-						<td scope="col" class="bg-primary"> WPM </td>
-						<td scope="col" class="bg-primary"> Time </td>
+						<td scope="col" class="bg-info"> MatchId </td>
+						<td scope="col" class="bg-info"> PlayerId </td>
+						<td scope="col" class="bg-info"> WPM </td>
+						<td scope="col" class="bg-info"> Time </td>
 					</tr>
 				</thead>
 			</table>
 			</div>
 			<div class="col-md-4" style="min-height: 300px;">
-				<span class="badge badge-primary"> Ratings </span>
+				<!-- Display the Ratings ( Query in descending of Avg. speed and then get top 5 results ) -->
+				<span class="badge badge-success"> Ratings </span>
 				<table class="table table-bordered" style="font-size: 10px;margin-top:6px;text-align: center;">
 					<thead> 
 						<tr>
-							<td scope="col" class="bg-primary"> PlayerId </td>
-							<td scope="col" class="bg-primary"> Rating </td>
-							<td scope="col" class="bg-primary"> Rank </td>
+							<td scope="col" class="bg-success"> PlayerId </td>
+							<td scope="col" class="bg-success"> Avg Speed </td>
+							<td scope="col" class="bg-success"> Rank </td>
 						</tr>
 					</thead>
 				</table>
@@ -158,19 +166,18 @@
 		setTimeout(() => {
         	pre_typing.style.display = 'none';
 	    	post_typing.style.display = 'block';
-	    	// Get the start time
+			var match_id = Math.floor(Math.random()*101);
 	    	var start_time = Math.round((new Date()).getTime() / 1000);
+	    	// Load the objective string from the database of text
 	    	var str = "this is a simple paragraph that is meant to be nice and easy to type which is why there will be mommas no periods or any capital letters";
 			var correct = document.getElementById("correct");
 			var wrong = document.getElementById("wrong");
 			var remaining = document.getElementById("remaining");
-
 			var iNext = 0;
 			var wrongCount = 0;
 			var typingOn = true;
-
+			var acc_count = 0;
 			updatePage();
-
 			document.addEventListener('keydown', function(event){
 				if( typingOn==false ) return; 
 				if( event.key!="Backspace" && event.key.length>1 ) return;
@@ -185,16 +192,25 @@
 							typingOn = false;
 					    	var end_time = Math.round((new Date()).getTime() / 1000);
 					    	var current_speed = calc_wpm();
-							document.getElementById("result").textContent= current_speed.toString() + " WPM";
-							// Save the total time and Speed to the database
-					    	//
+					    	var accuracy = ( str.length - acc_count ) / str.length;
+					    	accuracy *= 100;
+					    	var total_time = end_time - start_time ;
+							document.getElementById("result_speed").textContent= current_speed.toString() + " WPM";
+							document.getElementById("result_error").textContent= accuracy.toString() + " %";
+							document.getElementById("result_time").textContent = total_time.toString() + " seconds";
+							document.getElementById("result_id").textContent = match_id.toString();
+							// Save Everything in history database primary key matchId
+							// match_id, current_speed, total_time, accuracy 
+					    	// Also update the average speed in profile table using current_speed
 					    	post_typing.style.display = 'none';
 					    	results.style.display = 'block';
 						}
 					}
 					else{
-						if(wrongCount<str.length-iNext)
+						if(wrongCount<str.length-iNext){
 							wrongCount++;
+							acc_count++;
+						}
 					}
 				}
 				else{
@@ -202,8 +218,10 @@
 						wrongCount--;	
 					}
 					else{
-						if(wrongCount<str.length-iNext)
+						if(wrongCount<str.length-iNext){
 							wrongCount++;
+							acc_count++;
+						}
 					}
 				}
 				updatePage();
@@ -217,6 +235,7 @@
 				correct.innerHTML = addBreaks(str1);
 				wrong.innerHTML = addBreaks(str2);
 				remaining.innerHTML = addBreaks(str3);
+				current_speed = 0;
 				current_speed = calc_wpm();
 				document.getElementById("speed").textContent= current_speed.toString() + " WPM";
 			}
