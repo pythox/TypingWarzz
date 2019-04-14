@@ -8,6 +8,23 @@
 	<title>TypingWarzz - Main Page</title>
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<link rel="stylesheet" href="lib/bootstrap-4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/flipclock/flipclock.css">
+	<style type="text/css">
+		.flip-clock-wrapper ul {
+		    background: #fff;
+		}
+
+		.flip-clock-wrapper ul li a div.up:after {
+		    background-color: #fff;
+		    background-color: rgba(0, 0, 0, 0.4);
+		}
+
+		.flip-clock-wrapper ul li a div div.inn {
+		    color: #007bff;
+		    text-shadow: 0 1px 1px #555;
+		    background-color: #ddd;
+		}
+	</style>
 </head>
 
 <body>
@@ -51,9 +68,17 @@
 		</nav>	
 	</div>
 	<!-- Typing box -->
-	<div class="container" style="margin-top: 20px;" id="typing_region">
+	<div class="container" style="margin-top: 20px;">
 		<div class="row">
-			<div class="col-md-8 h-100">
+			<div class="col-md-8 h-100"  style="min-height:300px;" id="pre_typing">
+				<span class="badge badge-primary" style="margin-left:3px;"> Get Ready !! </span>
+				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
+					<div class="clock" style="margin-left: 23%;">
+					</div>
+				</div>
+			</div>
+				
+			<div class="col-md-8 h-100"  style="min-height:300px;display: none;" id="post_typing">
 				<span class="badge badge-primary" style="margin-left:3px;"> Type this ..  </span>
 				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
 					<p>
@@ -109,71 +134,82 @@
 	</div>
 
     <script type="text/javascript" src="lib/jquery-3.4.0.min.js"></script>
-    <script src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-
+    <script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/flipclock/flipclock.js"></script>
 	<script type="text/javascript">
-		var str = "this is a simple paragraph that is meant to be nice and easy to type which is why there will be mommas no periods or any capital letters";
-
-		var correct = document.getElementById("correct");
-		var wrong = document.getElementById("wrong");
-		var remaining = document.getElementById("remaining");
-
-		var iNext = 0;
-		var wrongCount = 0;
-		var typingOn = true;
-
-		updatePage();
-
-		document.addEventListener('keydown', function(event){
-			if( typingOn==false ) return; 
-			if( event.key!="Backspace" && event.key.length>1 ) return;
-			if(wrongCount==0){
-				if( event.key=="Backspace" ){
-					if(iNext>0)
-						iNext--;	
-				}
-				else if( event.key==str[iNext] ){
-					iNext++;
-					if(iNext==str.length)
-						typingOn = false;
-				}
-				else{
-					if(wrongCount<str.length-iNext)
-						wrongCount++;
-				}
-			}
-			else{
-				if( event.key=="Backspace" ){
-					wrongCount--;	
-				}
-				else{
-					if(wrongCount<str.length-iNext)
-						wrongCount++;
-				}
-			}
-			updatePage();
+		var clock = $('.clock').FlipClock(10, {
+			clockFace: 'MinuteCounter',
+			countdown: true,
+			events: true
 		});
 
-		function updatePage(){
-			var str1, str2, str3, temp;
-			str1 = str.substring(0,iNext);
-			str2 = str.substr(iNext,wrongCount);
-			str3 = str.substring(iNext+wrongCount, str.length);
-			correct.innerHTML = addBreaks(str1);
-			wrong.innerHTML = addBreaks(str2);
-			remaining.innerHTML = addBreaks(str3);
-		}
+		const pre_typing = document.getElementById('pre_typing');
+		const post_typing = document.getElementById('post_typing');
+		setTimeout(() => {
+        	pre_typing.style.display = 'none';
+	    	post_typing.style.display = 'block';
+	    	var str = "this is a simple paragraph that is meant to be nice and easy to type which is why there will be mommas no periods or any capital letters";
+			var correct = document.getElementById("correct");
+			var wrong = document.getElementById("wrong");
+			var remaining = document.getElementById("remaining");
 
-		function addBreaks(textStr){
-			var res = "";
-			for(var i=0; i<textStr.length; i++){
-				if(textStr[i]==" ")
-					res += "&nbsp;<wbr>";
-				else 
-					res += textStr[i];
+			var iNext = 0;
+			var wrongCount = 0;
+			var typingOn = true;
+
+			updatePage();
+
+			document.addEventListener('keydown', function(event){
+				if( typingOn==false ) return; 
+				if( event.key!="Backspace" && event.key.length>1 ) return;
+				if(wrongCount==0){
+					if( event.key=="Backspace" ){
+						if(iNext>0)
+							iNext--;	
+					}
+					else if( event.key==str[iNext] ){
+						iNext++;
+						if(iNext==str.length)
+							typingOn = false;
+					}
+					else{
+						if(wrongCount<str.length-iNext)
+							wrongCount++;
+					}
+				}
+				else{
+					if( event.key=="Backspace" ){
+						wrongCount--;	
+					}
+					else{
+						if(wrongCount<str.length-iNext)
+							wrongCount++;
+					}
+				}
+				updatePage();
+			});
+
+			function updatePage(){
+				var str1, str2, str3, temp;
+				str1 = str.substring(0,iNext);
+				str2 = str.substr(iNext,wrongCount);
+				str3 = str.substring(iNext+wrongCount, str.length);
+				correct.innerHTML = addBreaks(str1);
+				wrong.innerHTML = addBreaks(str2);
+				remaining.innerHTML = addBreaks(str3);
 			}
-			return res;
-		}
+
+			function addBreaks(textStr){
+				var res = "";
+				for(var i=0; i<textStr.length; i++){
+					if(textStr[i]==" ")
+						res += "&nbsp;<wbr>";
+					else 
+						res += textStr[i];
+				}
+				return res;
+			}
+        }, 11000);
 </script>
 </body>
 </html>
