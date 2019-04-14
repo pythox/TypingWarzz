@@ -232,8 +232,7 @@
 					    		url: "dbhelper.php",
 					    		type: 'POST',
 					    		data: ({id:match_id, prof:"<?php echo($_SESSION['username']); ?>", speed:current_speed, time:total_time}),
-					    		async: true,
-					    		success: function(data) {alert(data);}
+					    		async: true
 					    	})
 					    	post_typing.style.display = 'none';
 					    	results.style.display = 'block';

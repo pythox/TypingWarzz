@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="lib/jquery-3.4.0.min.js"></script>
 	<script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
 	<?php
 		$servername = "localhost";
 	    $username = "root";
@@ -37,15 +38,20 @@
 			}
 		}
 	?>
+	<style type="text/css">
+	body {
+        font-family: 'Karla', sans-serif !important;
+    }
+	</style>
 </head>
 <body>
 	<div class="container">
 		<hr>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center" style="margin-top: 5%;">
 			<div class="col-md-6">
 				<div class="card">
 					<header class="card-header">
-						<a href="login.phps" class="float-right btn btn-outline-primary mt-1">Log in</a>
+						<a href="index.php" class="float-right btn btn-outline-primary mt-1">Log in</a>
 						<h4 class="card-title mt-2">Sign up</h4>
 					</header>
 					<article class="card-body">
@@ -86,10 +92,8 @@
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary btn-block"> Register  </button>
 							</div> <!-- form-group// -->      
-							<small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>                                          
 						</form>
 					</article> <!-- card-body end .// -->
-					<div class="border-top card-body text-center">Have an account? <a href="login.php">Log In</a></div>
 				</div> <!-- card.// -->
 			</div> <!-- col.//-->
 		</div> <!-- row.//-->
