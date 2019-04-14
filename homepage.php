@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -169,7 +168,7 @@
 			var match_id = Math.floor(Math.random()*101);
 	    	var start_time = Math.round((new Date()).getTime() / 1000);
 	    	// Load the objective string from the database of text
-	    	var str = "this is a simple paragraph that is meant to be nice and easy to type which is why there will be mommas no periods or any capital letters";
+	    	var str = "this is ";
 			var correct = document.getElementById("correct");
 			var wrong = document.getElementById("wrong");
 			var remaining = document.getElementById("remaining");
@@ -199,9 +198,13 @@
 							document.getElementById("result_error").textContent= accuracy.toString() + " %";
 							document.getElementById("result_time").textContent = total_time.toString() + " seconds";
 							document.getElementById("result_id").textContent = match_id.toString();
-							// Save Everything in history database primary key matchId
-							// match_id, current_speed, total_time, accuracy 
-					    	// Also update the average speed in profile table using current_speed
+					    	$.ajax({
+					    		url: "dbhelper.php",
+					    		type: 'POST',
+					    		data: ({id:match_id, prof:"MEET", speed:current_speed, time:total_time}),
+					    		async: true,
+					    		success: function(data) {alert(data);}
+					    	})
 					    	post_typing.style.display = 'none';
 					    	results.style.display = 'block';
 						}
