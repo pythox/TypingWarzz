@@ -1,0 +1,32 @@
+p {
+	font-size: 0;
+}
+
+body {
+  font-family: 'Helvetica' !important;
+}
+
+td {
+	font-size: 12px;
+}
+
+#typing_region{
+	white-space: nowrap;
+}
+
+#correct{
+	background-color: #CFFF5B;
+	font-family: "Courier New", Courier;
+	font-size: 20px;
+}
+
+#wrong{
+	background-color: #D36582;
+	font-family: "Courier New", Courier;
+	font-size: 20px;
+}
+
+#remaining {
+	font-family: "Courier New", Courier;
+	font-size: 20px;
+}
