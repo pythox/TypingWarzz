@@ -77,9 +77,17 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="col-md-8 h-100"  style="min-height:300px;display: none;" id="results">
+				<span class="badge badge-primary" style="margin-left:3px;"> Results </span>
+				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
+					<span id="result"></span>
+					<a href="homepage.php" class="btn btn-primary" role="button">Race Again</a>
+				</div>
+			</div>
 				
 			<div class="col-md-8 h-100"  style="min-height:300px;display: none;" id="post_typing">
-				<span class="badge badge-primary" style="margin-left:3px;"> Type this ..  </span>
+				<span class="badge badge-primary" style="margin-left:3px;" id="speed"></span>
 				<div class="jumbotron" style="min-height: 300px; margin-top:6px;">
 					<p>
 						<span id="correct"></span>
@@ -137,7 +145,7 @@
     <script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/flipclock/flipclock.js"></script>
 	<script type="text/javascript">
-		var clock = $('.clock').FlipClock(10, {
+		var clock = $('.clock').FlipClock(5, {
 			clockFace: 'MinuteCounter',
 			countdown: true,
 			events: true
@@ -145,9 +153,13 @@
 
 		const pre_typing = document.getElementById('pre_typing');
 		const post_typing = document.getElementById('post_typing');
+		const results = document.getElementById('results');
+
 		setTimeout(() => {
         	pre_typing.style.display = 'none';
 	    	post_typing.style.display = 'block';
+	    	// Get the start time
+	    	var start_time = Math.round((new Date()).getTime() / 1000);
 	    	var str = "this is a simple paragraph that is meant to be nice and easy to type which is why there will be mommas no periods or any capital letters";
 			var correct = document.getElementById("correct");
 			var wrong = document.getElementById("wrong");
@@ -169,8 +181,16 @@
 					}
 					else if( event.key==str[iNext] ){
 						iNext++;
-						if(iNext==str.length)
+						if(iNext==str.length) {
 							typingOn = false;
+					    	var end_time = Math.round((new Date()).getTime() / 1000);
+					    	var current_speed = calc_wpm();
+							document.getElementById("result").textContent= current_speed.toString() + " WPM";
+							// Save the total time and Speed to the database
+					    	//
+					    	post_typing.style.display = 'none';
+					    	results.style.display = 'block';
+						}
 					}
 					else{
 						if(wrongCount<str.length-iNext)
@@ -197,6 +217,8 @@
 				correct.innerHTML = addBreaks(str1);
 				wrong.innerHTML = addBreaks(str2);
 				remaining.innerHTML = addBreaks(str3);
+				current_speed = calc_wpm();
+				document.getElementById("speed").textContent= current_speed.toString() + " WPM";
 			}
 
 			function addBreaks(textStr){
@@ -209,7 +231,17 @@
 				}
 				return res;
 			}
-        }, 11000);
+
+			function calc_wpm(){
+	    		var current_time = Math.round((new Date()).getTime() / 1000);
+	    		var time_in_minutes = (current_time - start_time) / 60;
+	    		var words_typed = iNext / 5;
+	    		var current_speed = words_typed / time_in_minutes; 
+	    		current_speed = Math.floor(current_speed);
+				return current_speed;
+			}
+
+        }, 5500);
 </script>
 </body>
 </html>
