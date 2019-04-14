@@ -16,27 +16,22 @@
 		<nav class="navbar navbar-expand-md navbar-light bg-primary navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a href="/typeracer/homepage.php" class="navbar-brand"><img src="logo.png" width=30 length=30></a>
+					<a href="/TypingWarzz/homepage.php" class="navbar-brand"><img src="logo.png" width=30 length=30></a>
 					<span class="navbar-text" style="font-family: 'Helvetica';color: white;font-size: 20px;"> <b> TypingWarzz </b> </span>					
 				</div>
 		    <ul class="navbar-nav navbar-left">
 				<li class="nav-item"> 
-					<a href="#" class="nav-link active"> 
+					<a href="/TypingWarzz/homepage.php" class="nav-link active"> 
 						Home
 					</a>
 				</li>
 				<li class="nav-item"> 
-					<a href="#" class="nav-link"> 
+					<a href="/TypingWarzz/profile.php" class="nav-link"> 
 						Profile
 					</a>
 				</li>
 				<li class="nav-item"> 
-					<a href="#" class="nav-link"> 
-						Leaderboard
-					</a>
-				</li>
-				<li class="nav-item"> 
-					<a href="#" class="nav-link"> 
+					<a href="/TypingWarzz/aboutus.php" class="nav-link"> 
 						About Us
 					</a>
 				</li>

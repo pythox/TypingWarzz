@@ -56,7 +56,7 @@
                     $_SESSION['username'] = $username;
                     $_SESSION['password'] = $password;
                     $_SESSION['ID'] = $row['ID'][0];
-                    $url = "/typeracer/homepage.php";
+                    $url = "homepage.php";
                     header('Location: '.$url);
                     exit();
                 }
