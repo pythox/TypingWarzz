@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TypingWarzz-Login</title>
-    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
     <link rel="stylesheet" href="lib/bootstrap-4.3.1/css/bootstrap.min.css"  rel="stylesheet" id="bootstrap-css">
     <script type="text/javascript" src="lib/jquery-3.4.0.min.js"></script>
     <script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <style type="text/css">
+    @font-face {
+      font-family: 'Karla';
+      font-style: normal;
+      font-weight: 400;
+      src: url('fonts/Karla-Regular.ttf');
+    }
+    body {
+      font-family: 'Karla', sans-serif !important;
+    }
     .login-form {
         width: 340px;
         margin: 50px auto;

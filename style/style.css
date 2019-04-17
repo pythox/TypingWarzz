@@ -1,16 +1,5 @@
-@font-face {
-  font-family: 'Karla';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/Karla-Regular.ttf');
-}
-
 p {
 	font-size: 0;
-}
-
-body {
-  font-family: 'Karla', sans-serif !important;
 }
 
 td {

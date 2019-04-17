@@ -6,7 +6,6 @@
 	<script type="text/javascript" src="lib/jquery-3.4.0.min.js"></script>
 	<script type="text/javascript" src="lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
 	<?php
 		$servername = "localhost";
 	    $username = "root";
@@ -39,9 +38,15 @@
 		}
 	?>
 	<style type="text/css">
+	@font-face {
+	  font-family: 'Karla';
+	  font-style: normal;
+	  font-weight: 400;
+	  src: url('fonts/Karla-Regular.ttf');
+	}
 	body {
-        font-family: 'Karla', sans-serif !important;
-    }
+	  font-family: 'Karla', sans-serif !important;
+	}
 	</style>
 </head>
 <body>

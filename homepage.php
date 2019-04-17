@@ -20,8 +20,16 @@
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<link rel="stylesheet" href="lib/bootstrap-4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="lib/flipclock/flipclock.css">
-	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
 	<style type="text/css">
+		@font-face {
+		  font-family: 'Karla';
+		  font-style: normal;
+		  font-weight: 400;
+		  src: url('fonts/Karla-Regular.ttf');
+		}
+		body {
+		  font-family: 'Karla', sans-serif !important;
+		}
 		.flip-clock-wrapper ul {
 		    background: #fff;
 		}
