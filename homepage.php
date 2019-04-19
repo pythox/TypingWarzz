@@ -9,7 +9,6 @@
         die("Connection failed: " . mysqli_connect_error());
     }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,12 +62,12 @@
 					</a>
 				</li>
 				<li class="nav-item"> 
-					<a href="/TypingWarzz/profile.php" class="nav-link"> 
+					<a href="#" class="nav-link"> 
 						<b>Profile</b>
 					</a>
 				</li>
 				<li class="nav-item"> 
-					<a href="/TypingWarzz/aboutus.php" class="nav-link"> 
+					<a href="#" class="nav-link"> 
 						<b>About Us</b>
 					</a>
 				</li>
